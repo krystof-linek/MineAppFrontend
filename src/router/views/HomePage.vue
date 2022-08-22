@@ -13,12 +13,7 @@
           <v-row class="pa-0 ma-0">
             <v-col cols="12">
               <v-card rounded="lg" color="transparent" outlined class="pa-0 ma-0">
-                <iframe
-                  :src="`http://82.208.17.33:30873/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true`"
-                  width="100%"
-                  height="300"
-                  frameborder="0" >
-                </iframe>
+                <vue-friendly-iframe src="http://82.208.17.33:30873/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true" @load="onLoad"></vue-friendly-iframe>
               </v-card>
             </v-col>
             
