@@ -1,6 +1,10 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
+import HomePage from "./views/HomePage"
+import ContactPage from "./views/ContactPage"
+import ShopPage from "./views/ShopPage"
+
 /*
 import ContactInfo from "./views/ContactInfo"
 import AppInfo from "./views/AppInfo"
@@ -93,5 +97,18 @@ router.beforeEach((to, from, next) => {
 });
 
 */
+
+
+
+Vue.use(VueRouter)
+
+const routes = [
+    { path: "/", component: HomePage, name: "homePage"},
+    { path: "/kontakty", component: ContactPage, name: "contactPage"},
+    { path: "/", component: ShopPage, name: "shopPage"},
+];
+
+const router = new VueRouter( {routes: routes, mode: "history"} );
+
 export default router;
 
