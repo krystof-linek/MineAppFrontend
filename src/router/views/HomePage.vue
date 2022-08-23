@@ -12,7 +12,7 @@
         <v-col cols="5" class="pa-0">
           <v-row class="pa-0 ma-0">
             <v-col cols="12">
-              <v-card rounded="lg" color="transparent" outlined class="pa-0 ma-0" height="300">
+              <v-card rounded="lg" class="pa-0 ma-0" height="300">
                 <iframe
                   :src="`https://mine-app-dynamp.herokuapp.com/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true`"
                   width="80%"
