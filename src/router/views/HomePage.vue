@@ -13,7 +13,7 @@
           <v-row class="pa-0 ma-0">
             <v-col cols="12">
               <v-card rounded="lg" color="transparent" outlined class="pa-0 ma-0">
-                <vue-friendly-iframe src="http://82.208.17.33:30873/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true" @load="onLoad"></vue-friendly-iframe>
+                <vue-friendly-iframe src="https://mine-app-dynamp.herokuapp.com/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true" @load="onLoad"></vue-friendly-iframe>
               </v-card>
             </v-col>
             
