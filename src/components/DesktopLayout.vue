@@ -1,20 +1,41 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar height="40" color="orange" app>
+    <v-system-bar class="px-2" height="40" color="orange" app>
+
+      <v-row v-if="serverInfo != null">
+        
+        <v-col class="px-0" cols="3">
+          <v-card-title :style="serverInfoTitleSize">IP: 82.208.17.33:27873</v-card-title>
+        </v-col>
+
+        <v-col class="px-0" cols="2">
+          <v-card-title :style="serverInfoTitleSize">Verze: {{serverInfo.version}}</v-card-title>
+        </v-col>
+
+        <v-col class="px-0" cols="2">
+          <v-card-title :style="serverInfoTitleSize">Status: <span class="ml-1  font-weight-bold" :style="serverInfo.status == 'Online' ? 'color: #76FF03' : 'color: red'">{{serverInfo.status.toLowerCase()}}</span></v-card-title>
+        </v-col>
+
+        <v-col class="px-0" cols="2">
+          <v-card-title :style="serverInfoTitleSize"><v-icon :style="iconSize">mdi-account</v-icon>{{serverInfo.players}}/{{serverInfo.slots}}</v-card-title>
+        </v-col>
+      </v-row>
+
       <v-spacer></v-spacer>
 
-      <v-icon>mdi-email</v-icon>
+      <v-icon class="mr-2" :style="iconSize" @click="myRedirect('email')">mdi-email</v-icon>
 
-      <v-icon>mdi-facebook</v-icon>
+      <v-icon class="mr-2" :style="iconSize" @click="myRedirect('facebook')">mdi-facebook</v-icon>
 
-      <v-icon>mdi-instagram</v-icon>
+      <v-icon :style="iconSize" @click="myRedirect('instagram')">mdi-instagram</v-icon>
+
     </v-system-bar>
 
-    <v-app-bar color="orange lighten-2" app clipped-right flat height="90">
+    <v-app-bar color="orange lighten-2" app clipped-left flat height="90">
 
       <v-btn style="font-size: 1.5vw" class="font-weight-bold" text color="black" @click="$router.push({ name: 'homePage' })"><v-icon x-large>mdi-home</v-icon></v-btn>
 
-      <v-btn v-for="link in links" :key="link" style="font-size: 1.5vw" class="font-weight-bold" text color="black" @click="$router.push({ name: link.route })">{{ link.title }}</v-btn>
+      <v-btn v-for="link in links" :key="link.title" style="font-size: 1.5vw" class="font-weight-bold" text color="black" @click="$router.push({ name: link.route })">{{ link.title }}</v-btn>
 
       <v-spacer></v-spacer>
 
@@ -23,7 +44,7 @@
       </v-responsive>
     </v-app-bar>
 
-    <v-navigation-drawer app clipped right>
+    <v-navigation-drawer v-if="isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
         <v-list-item class="ma-2 mb-3">
           <v-row>
@@ -50,7 +71,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main class="grey lighten-1 pa-4">
+    <v-main class="grey lighten-1 pa-4 pa-lg-8">
       <router-view></router-view>
     </v-main>
 
@@ -61,6 +82,8 @@
   export default {
     data: () => ({ 
       drawer: null,
+      isUserLogged: true,
+      serverInfo: null,
 
       links: [
         {
@@ -72,7 +95,50 @@
           route: "contactPage",
         }
       ],
+    }),
+    computed: {
+      serverInfoTitleSize() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'md': return 'font-size: 2.1vw'
+          case 'lg': return 'font-size: 1.2vw'
+          default: return 'font-size: 1.4vw'
+        }
+      },
+      iconSize() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'md': return 'font-size: 2.1vw'
+          case 'lg': return 'font-size: 1.7vw'
+          default: return 'font-size: 1.4vw'
+        }
+      },
+    },
+    methods: {
+      async loadServerInfo(){
+        try{
 
-      }),
+          const req = this.$http.create({ baseURL:  "https://query.fakaheda.eu"});
+
+          const response = await req.get(`/82.208.17.33:27873.feed`);
+
+          this.serverInfo = response.data;
+
+        } catch (e) {
+          const status = e.response.status;
+            
+          console.log(status);
+        }
+      },
+      myRedirect(type){
+        if (type == "email")
+          window.open('https://github.com/krystof-linek','_blank');
+        if (type == "facebook")
+          window.open('https://www.facebook.com/krystof.linek/','_blank');
+        if (type == "instagram")
+          window.open('https://www.instagram.com/craftfun.cz/','_blank');
+    },
+    },
+    mounted(){
+      this.loadServerInfo();
+    }
   }
 </script>
