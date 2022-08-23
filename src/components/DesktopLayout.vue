@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar class="px-2" height="40" color="orange" app>
+    <v-system-bar class="px-4 px-sm-8" height="40" color="orange" app>
 
       <v-row v-if="serverInfo != null">
         
