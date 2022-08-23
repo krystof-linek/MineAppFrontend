@@ -1,35 +1,45 @@
 <template>
-  <v-row>
-        <v-col cols="7">
+  <v-row v-if="$vuetify.breakpoint.mdAndUp">
+    <v-col cols="7">
           
-            <v-card rounded="lg" class="mb-4" v-for="post in posts" :key="post.id">
-              <v-card-title>{{post.title}}</v-card-title>
-              <v-card-text>{{post.text}}</v-card-text>
-            </v-card>
+        <v-card rounded="lg" class="mb-4" v-for="post in posts" :key="post.id">
+          <v-card-title>{{post.title}}</v-card-title>
+          <v-card-text>{{post.text}}</v-card-text>
+        </v-card>
           
-        </v-col>
+    </v-col>
         
-        <v-col cols="5" class="pa-0">
-          <v-row class="pa-0 ma-0">
-            <v-col cols="12">
-              <v-card rounded="lg" class="pa-0 ma-0" height="300">
-                <iframe
-                  :src="`https://mine-app-dynamp.herokuapp.com/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true`"
-                  width="100%"
-                  height="300"
-                  frameborder="0" >
-                </iframe>
-              </v-card>
-            </v-col>
-            
-            <v-col cols="12">
-              <v-card class="pa-0 ma-0" height="300">
-                <v-card-title>Server list</v-card-title>
-              </v-card>
-            </v-col>
-          </v-row>
+    <v-col cols="5" class="pa-0">
+      <v-row class="pa-0 ma-0">
+        <v-col cols="12">
+          <v-card rounded="lg" class="pa-0 ma-0" height="300">
+            <iframe
+              :src="`https://mine-app-dynamp.herokuapp.com/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true`"
+              width="100%"
+              height="300"
+              frameborder="0" >
+            </iframe>
+          </v-card>
         </v-col>
-    </v-row>
+            
+        <v-col cols="12">
+          <v-card class="pa-0 ma-0" height="300">
+            <v-card-title>Server list</v-card-title>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-col>
+  </v-row>
+
+  <v-row class="ma-0" v-else>
+    <v-col class="pa-0" cols="12">
+      <v-card rounded="0" v-for="post in posts" :key="post.id">
+        <v-card-title>{{post.title}}</v-card-title>
+        <v-card-text>{{post.text}}</v-card-text>
+        <v-divider></v-divider>
+      </v-card>    
+    </v-col>
+  </v-row>
 </template>
 <script>
 

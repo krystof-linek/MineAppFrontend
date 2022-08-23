@@ -4,19 +4,19 @@
 
       <v-row v-if="serverInfo != null">
         
-        <v-col class="px-0" cols="3">
+        <v-col class="px-0" cols="6" sm="4">
           <v-card-title :style="serverInfoTitleSize">IP: 82.208.17.33:27873</v-card-title>
         </v-col>
 
-        <v-col class="px-0" cols="2">
+        <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" cols="3" sm="3">
           <v-card-title :style="serverInfoTitleSize">Verze: {{serverInfo.version}}</v-card-title>
         </v-col>
 
-        <v-col class="px-0" cols="2">
+        <v-col class="px-0" cols="6" sm="3">
           <v-card-title :style="serverInfoTitleSize">Status: <span class="ml-1  font-weight-bold" :style="serverInfo.status == 'Online' ? 'color: #76FF03' : 'color: red'">{{serverInfo.status.toLowerCase()}}</span></v-card-title>
         </v-col>
 
-        <v-col class="px-0" cols="2">
+        <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" cols="2" sm="2">
           <v-card-title :style="serverInfoTitleSize"><v-icon :style="iconSize">mdi-account</v-icon>{{serverInfo.players}}/{{serverInfo.slots}}</v-card-title>
         </v-col>
       </v-row>
@@ -71,7 +71,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main class="grey lighten-1 pa-4 pa-lg-8">
+    <v-main class="grey lighten-1 pa-0 pa-md-4 pa-lg-8">
       <router-view></router-view>
     </v-main>
 
@@ -99,13 +99,17 @@
     computed: {
       serverInfoTitleSize() {
         switch (this.$vuetify.breakpoint.name) {
-          case 'md': return 'font-size: 2.1vw'
+          case 'xs': return 'font-size: 2.3vw'
+          case 'sm': return 'font-size: 1.6vw'
+          case 'md': return 'font-size: 1.3vw'
           case 'lg': return 'font-size: 1.2vw'
-          default: return 'font-size: 1.4vw'
+          default: return 'font-size: 1vw'
         }
       },
       iconSize() {
         switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 'font-size: 5vw'
+          case 'sm': return 'font-size: 2.5vw'
           case 'md': return 'font-size: 2.1vw'
           case 'lg': return 'font-size: 1.7vw'
           default: return 'font-size: 1.4vw'
