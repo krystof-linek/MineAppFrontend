@@ -1,37 +1,34 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar class="px-4 px-sm-8" height="40" color="orange" app>
+    <v-system-bar class="px-7" height="40" color="orange" app>
 
-      <v-row v-if="serverInfo != null">
+      <v-row v-if="serverInfo != null" align="center">
         
-        <v-col class="px-0" cols="6" sm="4">
-          <v-card-title :style="serverInfoTitleSize">IP: 82.208.17.33:27873</v-card-title>
+        <v-col class="px-0" cols="4" sm="3">
+          <v-card-title class="pa-0" :style="serverInfoTitleSize">IP: 82.208.17.33:27873</v-card-title>
         </v-col>
 
-        <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" cols="3" sm="3">
-          <v-card-title :style="serverInfoTitleSize">Verze: {{serverInfo.version}}</v-card-title>
+        <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" sm="2">
+          <v-card-title class="pa-0" :style="serverInfoTitleSize">Verze: {{serverInfo.version}}</v-card-title>
         </v-col>
 
-        <v-col class="px-0" cols="6" sm="3">
-          <v-card-title :style="serverInfoTitleSize">Status: <span class="ml-1  font-weight-bold" :style="serverInfo.status == 'Online' ? 'color: #76FF03' : 'color: red'">{{serverInfo.status.toLowerCase()}}</span></v-card-title>
+        <v-col class="px-0" cols="5" sm="2">
+          <v-card-title class="pa-0" :style="serverInfoTitleSize">Status: <span class="ml-1  font-weight-bold" :style="serverInfo.status == 'Online' ? 'color: #76FF03' : 'color: red'">{{serverInfo.status.toLowerCase()}}</span></v-card-title>
         </v-col>
 
-        <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" cols="2" sm="2">
-          <v-card-title :style="serverInfoTitleSize"><v-icon :style="iconSize">mdi-account</v-icon>{{serverInfo.players}}/{{serverInfo.slots}}</v-card-title>
+        <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" sm="2">
+          <v-card-title class="pa-0" :style="serverInfoTitleSize"><v-icon :style="iconSize">mdi-account</v-icon>{{serverInfo.players}}/{{serverInfo.slots}}</v-card-title>
+        </v-col>
+      
+        <v-col cols="3" sm="3" class="px-0 mb-1 text-right">
+          <v-icon class="mr-2" :style="iconSize" @click="myRedirect('email')">mdi-email</v-icon>
+          <v-icon class="mr-2" :style="iconSize" @click="myRedirect('facebook')">mdi-facebook</v-icon>
+          <v-icon class="mr-0" :style="iconSize" @click="myRedirect('instagram')">mdi-instagram</v-icon>
         </v-col>
       </v-row>
-
-      <v-spacer></v-spacer>
-
-      <v-icon class="mr-2" :style="iconSize" @click="myRedirect('email')">mdi-email</v-icon>
-
-      <v-icon class="mr-2" :style="iconSize" @click="myRedirect('facebook')">mdi-facebook</v-icon>
-
-      <v-icon :style="iconSize" @click="myRedirect('instagram')">mdi-instagram</v-icon>
-
     </v-system-bar>
-
-    <v-app-bar color="orange lighten-2" app clipped-left flat height="90">
+    <!-- Desktop nav bar -->
+    <v-app-bar v-if="$vuetify.breakpoint.mdAndUp" color="orange lighten-2" app clipped-left flat height="90">
 
       <v-btn style="font-size: 1.5vw" class="font-weight-bold" text color="black" @click="$router.push({ name: 'homePage' })"><v-icon x-large>mdi-home</v-icon></v-btn>
 
@@ -42,6 +39,28 @@
       <v-responsive max-width="156">
         <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
       </v-responsive>
+    </v-app-bar>
+    <!-- Small devices nav bar (xs, sm)-->
+    <v-app-bar v-else color="orange lighten-2" app flat height="70">
+      <v-row class="ma-0" align="center">
+
+        <v-col cols="3" sm="2" class="pa-0">
+          <v-btn color="orange" height="45" width="40">
+            <v-icon large>mdi-logout-variant</v-icon>
+          </v-btn>
+        </v-col>
+
+        <v-col cols="6" sm="8" class="white--text font-weight-bold text-center">
+          <v-btn text link @click="$router.push({ name: 'homePage' })" :style="logoFontStyle" >CraftFun</v-btn>
+        </v-col>
+        
+        <v-col cols="3" sm="2" class="pa-0 ma-0 text-right">
+          <v-btn class="pa-0 ma-0" color="orange" height="45" width="40" @click="showMenu = !showMenu">
+            <v-icon large>mdi-menu</v-icon>
+          </v-btn>
+        </v-col>
+      
+      </v-row>
     </v-app-bar>
 
     <v-navigation-drawer v-if="isUserLogged" app clipped left>
