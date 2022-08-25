@@ -64,8 +64,7 @@
       </v-row>
     </v-app-bar>
     
-    <v-sheet v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
-      </v-list>
+    <v-list class="orange" v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
         <v-list-item v-for="n in 5" :key="n" link>
           <v-list-item-content>
 
@@ -75,7 +74,6 @@
 
         </v-list-item>
       </v-list>
-    </v-sheet>
 
     <v-navigation-drawer v-if="isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
