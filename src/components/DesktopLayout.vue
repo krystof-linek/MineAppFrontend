@@ -41,7 +41,7 @@
       </v-responsive>
     </v-app-bar>
     <!-- Small devices nav bar (xs, sm)-->
-    <v-app-bar v-else color="orange lighten-2" app flat min-height="70">
+    <v-app-bar v-else color="orange lighten-2" app flat height="70">
       <v-row class="ma-0" align="center">
 
         <v-col cols="3" sm="2" class="pa-0">
@@ -62,7 +62,7 @@
         </v-col>
       
       </v-row>
-      
+    </v-app-bar>
         <v-list v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" link>
           <v-list-item v-for="link in links" :key="link.title" link @click="$router.push({ name: link.route }); isMenuShowed = false">
             <v-list-item-content>
@@ -75,7 +75,7 @@
         
         <v-divider></v-divider>
         
-        <v-list v-if="isUserLogged" class="orange">
+        <v-list v-if="$vuetify.breakpoint.smAndDown && isUserLogged" class="orange">
           <v-list-item class="ma-2 mb-3">
             <v-row>
               <v-col cols="4" class="pa-0 ma-0">
@@ -100,7 +100,6 @@
             </v-list-item-content>
           </v-list-item>
       </v-list>
-    </v-app-bar>
 
     <v-navigation-drawer v-if="isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
