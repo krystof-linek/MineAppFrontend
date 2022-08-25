@@ -56,13 +56,27 @@
         </v-col>
         
         <v-col cols="3" sm="2" class="pa-0 ma-0 text-right">
-          <v-btn class="pa-0 ma-0" color="orange" height="45" width="40" @click="showMenu = !showMenu">
+          <v-btn class="pa-0 ma-0" color="orange" height="45" width="40" @click="isMenuShowed = !isMenuShowed">
             <v-icon large>mdi-menu</v-icon>
           </v-btn>
         </v-col>
       
       </v-row>
     </v-app-bar>
+    
+    <v-sheet v-if="isMenuShowed">
+      <v-list-item v-for="n in 5" :key="n" link>
+
+          <v-list-item-content>
+
+            <v-list-item-title>Item {{ n }}</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+      </v-list>
+    </v-sheet>
 
     <v-navigation-drawer v-if="isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
@@ -103,6 +117,7 @@
     data: () => ({ 
       drawer: null,
       isUserLogged: false,
+      isMenuShowed: false,
       serverInfo: null,
 
       links: [
