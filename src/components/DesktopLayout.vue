@@ -78,7 +78,7 @@
             </v-row>
           </v-list-item>
               
-          <v-divider></v-divider>    
+          <v-divider v-if="isUserLogged"></v-divider>    
           
           <v-list-item v-for="link in links" :key="link.title" link @click="$router.push({ name: link.route }); isMenuShowed = false">
             <v-list-item-content>
@@ -86,15 +86,17 @@
                 {{ link.title }}
               </v-list-item-title>
             </v-list-item-content>
-          </v-list-item>
-          
-          <v-list-item v-for="n in 5" :key="n" link>
+          </v-list-item>   
+      </v-list>
+      
+      <v-list v-if="isUserLogged">
+        <v-list-item v-for="n in 5" :key="n" link>
             <v-list-item-content>
               <v-list-item-title>
                 Item {{ n }}
               </v-list-item-title>
             </v-list-item-content>
-          </v-list-item>   
+          </v-list-item>
       </v-list>
 
     <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndUp && isUserLogged" app clipped left>
