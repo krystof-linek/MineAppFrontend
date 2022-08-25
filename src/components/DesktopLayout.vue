@@ -45,8 +45,9 @@
       <v-row class="ma-0" align="center">
 
         <v-col cols="3" sm="2" class="pa-0">
-          <v-btn color="orange" height="45" width="40">
-            <v-icon large>mdi-logout-variant</v-icon>
+          <v-btn color="orange" height="45" width="40" @click="isUserLogged = !isUserLogged">
+            <v-icon v-if="isUserLogged" large>mdi-login-variant</v-icon>
+            <v-icon v-else large>mdi-logout-variant</v-icon>
           </v-btn>
         </v-col>
 
@@ -101,7 +102,7 @@
   export default {
     data: () => ({ 
       drawer: null,
-      isUserLogged: true,
+      isUserLogged: false,
       serverInfo: null,
 
       links: [
