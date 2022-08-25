@@ -41,7 +41,7 @@
       </v-responsive>
     </v-app-bar>
     <!-- Small devices nav bar (xs, sm)-->
-    <v-app-bar v-else color="orange lighten-2" app flat height="70">
+    <v-app-bar v-else color="orange lighten-2" app flat min-height="70">
       <v-row class="ma-0" align="center">
 
         <v-col cols="3" sm="2" class="pa-0">
