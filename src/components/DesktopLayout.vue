@@ -64,7 +64,7 @@
       </v-row>
     </v-app-bar>
     
-    <v-navigation-drawer v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" app permanent>
+    <v-navigation-drawer v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" app permanent absolute>
         <v-list> 
           <v-list-item v-if="isUserLogged">
             <v-row>
