@@ -63,9 +63,11 @@
       
       </v-row>
     </v-app-bar>
-        <v-list v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" link> 
+    
+    <v-navigation-drawer v-if="$vuetify.breakpoint.smAndDown && isMenuShow">
+        <v-list class="orange" link> 
           <v-list-item v-if="isUserLogged">
-            <v-row>
+            <v-row align="center">
               <v-col cols="4" class="pa-0 ma-0">
                 <v-img width="45" src="https://minotar.net/avatar/krystoflinek"></v-img>
               </v-col>
@@ -89,7 +91,7 @@
           </v-list-item>   
       </v-list>
       
-      <v-list v-if="isUserLogged">
+      <v-list color="orange" v-if="isUserLogged">
         <v-list-item v-for="n in 5" :key="n" link>
             <v-list-item-content>
               <v-list-item-title class="text-center">
@@ -98,6 +100,8 @@
             </v-list-item-content>
           </v-list-item>
       </v-list>
+      
+    </v-navigation-drawer>
 
     <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndUp && isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
