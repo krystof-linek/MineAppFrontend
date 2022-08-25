@@ -63,25 +63,13 @@
       
       </v-row>
     </v-app-bar>
-        <v-list v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" link>
-          <v-list-item v-for="link in links" :key="link.title" link @click="$router.push({ name: link.route }); isMenuShowed = false">
-            <v-list-item-content>
-              <v-list-item-title class="text-center">
-                {{ link.title }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-        
-        <v-divider></v-divider>
-        
-        <v-list v-if="$vuetify.breakpoint.smAndDown && isUserLogged" class="orange">
-          <v-list-item class="ma-2 mb-3">
+        <v-list v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" link> 
+          <v-list-item v-if="isUserLogged">
             <v-row>
               <v-col cols="4" class="pa-0 ma-0">
                 <v-img width="45" src="https://minotar.net/avatar/krystoflinek"></v-img>
               </v-col>
-
+              
               <v-col cols="8">
                 <v-card-title class="pa-0 ma-0">
                   krystoflinek
@@ -89,19 +77,27 @@
               </v-col>
             </v-row>
           </v-list-item>
+              
+          <v-divider></v-divider>    
           
-          <v-divider></v-divider>
+          <v-list-item v-for="link in links" :key="link.title" link @click="$router.push({ name: link.route }); isMenuShowed = false">
+            <v-list-item-content>
+              <v-list-item-title class="text-center">
+                {{ link.title }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           
-          <v-list-item v-for="n in 5" :key="n" link>
+          <v-list-item v-if="isUserLogged" v-for="n in 5" :key="n" link>
             <v-list-item-content>
               <v-list-item-title>
                 Item {{ n }}
               </v-list-item-title>
             </v-list-item-content>
-          </v-list-item>
+          </v-list-item>   
       </v-list>
 
-    <v-navigation-drawer v-if="isUserLogged" app clipped left>
+    <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndUp && isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
         <v-list-item class="ma-2 mb-3">
           <v-row>
