@@ -91,27 +91,17 @@
           </v-list-item>   
       </v-list>
       
-      
+      <v-list v-if="isUserLogged">
+        <v-list-item v-for="n in 5" :key="n" link>
+            <v-list-item-content>
+              <v-list-item-title class="text-center">
+                Item {{ n }}
+              </v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+      </v-list>
       
     </v-navigation-drawer>
-    
-    <v-list v-if="isUserLogged">
-
-        <v-list-item v-for="n in 5" :key="n" link>
-
-            <v-list-item-content>
-
-              <v-list-item-title class="text-center">
-
-                Item {{ n }}
-
-              </v-list-item-title>
-
-            </v-list-item-content>
-
-          </v-list-item>
-
-      </v-list>
 
     <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndUp && isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
