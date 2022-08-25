@@ -66,9 +66,12 @@
     <!-- Mobile navigation -->
     <nav v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
         <v-list class="orange pb-0"> 
-          <v-list-item v-if="isUserLogged">
-            <v-list-item-content class="text-center">
-            <v-img width="45" src="https://minotar.net/avatar/krystoflinek"></v-img>
+          <v-list-item v-if="isUserLogged" class="text-center">
+            <v-list-item-icon>
+              <v-img src="https://minotar.net/avatar/krystoflinek"></v-img>
+            <v-list-item-icon>
+            
+            <v-list-item-content>
               <v-list-item-title>
                 krystoflinek
               </v-list-item-title>
