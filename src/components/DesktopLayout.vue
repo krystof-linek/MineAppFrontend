@@ -46,7 +46,7 @@
 
         <v-col cols="3" sm="2" class="pa-0">
           <v-btn color="orange" height="45" width="40" @click="isUserLogged = !isUserLogged">
-            <v-icon v-if="isUserLogged" large>mdi-login-variant</v-icon>
+            <v-icon v-if="!isUserLogged" large>mdi-login-variant</v-icon>
             <v-icon v-else large>mdi-logout-variant</v-icon>
           </v-btn>
         </v-col>
