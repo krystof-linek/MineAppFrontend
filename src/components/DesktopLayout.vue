@@ -65,20 +65,15 @@
     </v-app-bar>
     <!-- Mobile navigation -->
     <nav v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
-        <v-list class="orange"> 
+        <v-list class="orange pb-0"> 
           <v-list-item v-if="isUserLogged">
-            <v-row class="px-4">
-              <v-col cols="4" class="pa-0 ma-0">
-                <v-img width="45" src="https://minotar.net/avatar/krystoflinek"></v-img>
-              </v-col>
-              
-              <v-col cols="8">
-                <v-card-title class="pa-0 ma-0">
-                  krystoflinek
-                </v-card-title>
-              </v-col>
-            </v-row>
-          </v-list-item>
+            <v-list-item-content class="text-center">
+            <v-img width="45" src="https://minotar.net/avatar/krystoflinek"></v-img>
+              <v-list-item-title>
+                krystoflinek
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>  
               
           <v-divider v-if="isUserLogged"></v-divider>    
           
