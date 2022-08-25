@@ -64,16 +64,15 @@
       </v-row>
     </v-app-bar>
     
-    <v-list class="orange" v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
-        <v-list-item v-for="n in 5" :key="n" link>
-          <v-list-item-content>
-
-            <v-list-item-title>Item {{ n }}</v-list-item-title>
-
-          </v-list-item-content>
-
-        </v-list-item>
-      </v-list>
+    <v-list class="orange" link v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
+      <v-list-item v-for="link in links" :key="link.title" link @click="$router.push({ name: link.route })">
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ link.title }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
 
     <v-navigation-drawer v-if="isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
