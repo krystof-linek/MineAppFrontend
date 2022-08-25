@@ -67,12 +67,11 @@
     <nav v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
         <v-list class="orange pb-0"> 
           <v-list-item v-if="isUserLogged">
-            <v-list-item-avatar rounded="0">
-              <v-img src="https://minotar.net/avatar/krystoflinek"></v-img>
-            <v-list-item-avatar>
-            
-            <v-list-item-content>
-              <v-list-item-title class="text-center">
+            <v-list-item-content class="text-center">
+              <v-list-item-avatar rounded="0">
+                <v-img src="https://minotar.net/avatar/krystoflinek"></v-img>
+              <v-list-item-avatar>
+              <v-list-item-title>
                 krystoflinek
               </v-list-item-title>
             </v-list-item-content>
