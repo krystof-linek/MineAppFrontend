@@ -65,7 +65,7 @@
     </v-app-bar>
     
     <v-navigation-drawer v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" app>
-        <v-list link> 
+        <v-list> 
           <v-list-item v-if="isUserLogged">
             <v-row>
               <v-col cols="4" class="pa-0 ma-0">
@@ -91,17 +91,27 @@
           </v-list-item>   
       </v-list>
       
-      <v-list v-if="isUserLogged">
-        <v-list-item v-for="n in 5" :key="n" link>
-            <v-list-item-content>
-              <v-list-item-title class="text-center">
-                Item {{ n }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-      </v-list>
+      
       
     </v-navigation-drawer>
+    
+    <v-list v-if="isUserLogged">
+
+        <v-list-item v-for="n in 5" :key="n" link>
+
+            <v-list-item-content>
+
+              <v-list-item-title class="text-center">
+
+                Item {{ n }}
+
+              </v-list-item-title>
+
+            </v-list-item-content>
+
+          </v-list-item>
+
+      </v-list>
 
     <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndUp && isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
