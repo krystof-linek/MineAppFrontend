@@ -64,10 +64,10 @@
       </v-row>
     </v-app-bar>
     <!-- Mobile navigation -->
-    <nav v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange">
-        <v-list> 
+    <nav v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
+        <v-list class="orange"> 
           <v-list-item v-if="isUserLogged">
-            <v-row>
+            <v-row class="px-4">
               <v-col cols="4" class="pa-0 ma-0">
                 <v-img width="45" src="https://minotar.net/avatar/krystoflinek"></v-img>
               </v-col>
@@ -91,7 +91,7 @@
           </v-list-item>   
       </v-list>
       
-      <v-list v-if="isUserLogged">
+      <v-list v-if="isUserLogged" class="orange pa-0">
         <v-list-item v-for="n in 5" :key="n" link>
             <v-list-item-content>
               <v-list-item-title class="text-center">
