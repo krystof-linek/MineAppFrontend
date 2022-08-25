@@ -65,38 +65,49 @@
     </v-app-bar>
     <!-- Mobile navigation -->
     <nav v-if="$vuetify.breakpoint.smAndDown && isMenuShowed">
-        <v-list class="orange pb-0"> 
-          <v-list-item v-if="isUserLogged">
-            <v-list-item-avatar rounded="0">
-              <v-img src="https://minotar.net/avatar/krystoflinek"></v-img>
-            <v-list-item-avatar>
-            
-            <v-list-item-content>
-              <v-list-item-title>
-                krystoflinek
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>  
-              
-          <v-divider v-if="isUserLogged"></v-divider>    
-          
-          <v-list-item v-for="link in links" :key="link.title" link @click="$router.push({ name: link.route }); isMenuShowed = false">
-            <v-list-item-content>
-              <v-list-item-title class="text-center">
-                {{ link.title }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>   
+
+      <v-row v-if="isUserLogged" class="orange py-2">
+        <v-col class="text-center">
+          <v-avatar rounded="0" class="mr-2">
+            <v-img src="https://minotar.net/avatar/krystoflinek"></v-img>
+          </v-avatar>
+
+          <v-lable>
+            krystoflinek
+          </v-lable>
+        </v-col>
+      </v-row>
+
+      <v-divider v-if="isUserLogged"></v-divider> 
+
+        <v-list class="orange py-0 text-center">
+          <div v-for="link in links" :key="link.title">
+            <v-list-item link @click="$router.push({ name: link.route }); isMenuShowed = false">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ link.title }}
+                </v-list-item-title>
+              </v-list-item-content>
+           </v-list-item>
+
+            <v-divider></v-divider>
+
+          </div>   
       </v-list>
       
-      <v-list v-if="isUserLogged" class="orange pa-0">
-        <v-list-item v-for="n in 5" :key="n" link>
+      <v-list v-if="isUserLogged" class="orange py-0 text-center">
+        <div v-for="n in 5" :key="n" link>
+          <v-list-item>
             <v-list-item-content>
-              <v-list-item-title class="text-center">
+              <v-list-item-title>
                 Item {{ n }}
               </v-list-item-title>
             </v-list-item-content>
-        </v-list-item>
+          </v-list-item>
+
+          <v-divider></v-divider>
+
+        </div>
       </v-list>
       
     </nav>
