@@ -5,6 +5,8 @@ import HomePage from "./views/HomePage"
 import ContactPage from "./views/ContactPage"
 import ShopPage from "./views/ShopPage"
 
+import LoginPage from "./views/LoginPage"
+
 /*
 import ContactInfo from "./views/ContactInfo"
 import AppInfo from "./views/AppInfo"
@@ -105,7 +107,8 @@ Vue.use(VueRouter)
 const routes = [
     { path: "/", component: HomePage, name: "homePage"},
     { path: "/kontakty", component: ContactPage, name: "contactPage"},
-    { path: "/", component: ShopPage, name: "shopPage"},
+    { path: "/obchod", component: ShopPage, name: "shopPage"},
+    { path: "/prihlaseni", component: LoginPage, name: "loginPage"},
 ];
 
 const router = new VueRouter( {routes: routes, mode: "history"} );
