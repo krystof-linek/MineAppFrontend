@@ -63,8 +63,8 @@
       
       </v-row>
     </v-app-bar>
-    
-    <v-navigation-drawer v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange" stateless fixed>
+    <!-- Mobile navigation -->
+    <nav v-if="$vuetify.breakpoint.smAndDown && isMenuShowed" class="orange">
         <v-list> 
           <v-list-item v-if="isUserLogged">
             <v-row>
@@ -101,7 +101,7 @@
         </v-list-item>
       </v-list>
       
-    </v-navigation-drawer>
+    </nav>
 
     <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndUp && isUserLogged" app clipped left>
       <v-list class="orange" height="100vh">
