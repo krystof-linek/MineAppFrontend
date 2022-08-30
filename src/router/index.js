@@ -6,6 +6,7 @@ import ContactPage from "./views/ContactPage"
 import ShopPage from "./views/ShopPage"
 
 import LoginPage from "./views/LoginPage"
+import RegisterPage from "./views/RegisterPage"
 
 /*
 import ContactInfo from "./views/ContactInfo"
@@ -79,28 +80,9 @@ const routes = [
     
 ];
 
-
-
-const router = new VueRouter( {routes: routes, mode: "history"} );
-
-router.beforeEach((to, from, next) => {
-    if(to.meta != null && to.meta.requireAuth){
-        //kontrola, jestli mam token
-        if(tokenManager.isUserLogged()){
-            next();
-        } else {
-            tokenManager.removeToken();
-            userManager.removeEmail();
-            next({ name: "application" });
-        } 
-    } else {
-        next();
-    }
-});
-
 */
 
-
+import { credentialsManager } from "../main";
 
 Vue.use(VueRouter)
 
@@ -109,9 +91,24 @@ const routes = [
     { path: "/kontakty", component: ContactPage, name: "contactPage"},
     { path: "/obchod", component: ShopPage, name: "shopPage"},
     { path: "/prihlaseni", component: LoginPage, name: "loginPage"},
+    { path: "/registrace", component: RegisterPage, name: "registerPage"},
 ];
 
 const router = new VueRouter( {routes: routes, mode: "history"} );
+
+router.beforeEach((to, from, next) => {
+    if(to.meta != null && to.meta.requireAuth){
+        //kontrola, jestli mam potrebne udaje
+        if(credentialsManager.isUserCredentialsData()){
+            next();
+        } else {
+            credentialsManager.removeCredentials();
+            next({ name: "homePage" });
+        } 
+    } else {
+        next();
+    }
+});
 
 export default router;
 

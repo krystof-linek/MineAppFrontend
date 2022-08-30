@@ -44,7 +44,9 @@
 <script>
 
   export default {
-
+    props: {
+        userInfo: {default: null},
+    },
     data () {
       return {
         posts: [
@@ -68,7 +70,7 @@
           title: "4. Nadpis příspěvku",
           text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Etiam egestas wisi a erat. Donec quis nibh at felis congue commodo. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Quisque porta. Nunc dapibus tortor vel mi dapibus sollicitudin. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Nulla est. Maecenas sollicitudin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
         },
-      ]
+        ]
       }
     },
   }

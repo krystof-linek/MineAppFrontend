@@ -2,42 +2,24 @@
   
   <v-card v-if="$vuetify.breakpoint.mdAndUp" class="mx-auto mt-2 pb-0 orange lighten-2" rounded="lg" width="40vw">
     <v-card-title class="text-center orange">
-      Přihlášení
+      Registrace
     </v-card-title>
     <v-card width="60%" class="mx-auto py-6 transparent" outlined>
       <v-form v-model="valid" @submit.prevent="loginUser">
         <v-container>
           <v-row class="pa-0">
             <v-col cols="12" class="pa-0">
-              <v-text-field
-                v-model="nickname"
-                color="black"
-                outlined 
-                :rules="nameRules" 
-                label="Přihlašovací jméno" 
-                required
-                prepend-inner-icon="mdi-account">
-              </v-text-field>
+              <v-text-field v-model="nickname" outlined :rules="nameRules" label="Přihlašovací jméno" required></v-text-field>
             </v-col>
 
             <v-col cols="12" class="pa-0">
-              <v-text-field 
-                v-model="password"
-                color="black"
-                :type="isShowedPassword ? 'text' : 'password'" 
-                outlined 
-                :rules="passwordRules" 
-                label="Heslo" required 
-                :append-icon="isShowedPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                prepend-inner-icon="mdi-lock" 
-                @click:append="isShowedPassword = !isShowedPassword">
-              </v-text-field>
+              <v-text-field v-model="password" outlined :rules="passwordRules" label="Heslo" required></v-text-field>
             </v-col>
             <v-col cols="6" class="pa-0">
               <v-btn type="submit" :disabled="!valid" color="green">přihlásit se</v-btn>
             </v-col>
             <v-col cols="6" class="pa-0 text-right">
-              <v-btn color="red" @click="$router.push({ name: 'registerPage' })">registrovat se</v-btn>
+              <v-btn color="red">registrovat se</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -61,8 +43,6 @@
 
     data () {
       return {
-        isShowedPassword: false,
-
         valid: false,
         nickname: '',
         password: '',

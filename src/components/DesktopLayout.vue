@@ -36,9 +36,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-responsive max-width="156">
-        <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
-      </v-responsive>
+      <v-btn v-if="!isUserLogged" color="black" class="white--text px-2" @click="$router.push({ name: 'loginPage' })">Přihlásit se<v-icon class="ml-1">mdi-login-variant</v-icon></v-btn>
+      <v-btn v-else color="black" class="white--text px-2" @click="removeUser">Odhlásit se<v-icon class="ml-1">mdi-login-variant</v-icon></v-btn>
     </v-app-bar>
     <!-- Small devices nav bar (xs, sm)-->
     <v-app-bar v-else color="orange lighten-2" app flat height="70">
@@ -69,11 +68,11 @@
       <v-row v-if="isUserLogged" class="orange py-2">
         <v-col class="text-center">
           <v-avatar rounded="0" class="mr-2">
-            <v-img src="https://minotar.net/avatar/krystoflinek"></v-img>
+            <v-img :src='"https://minotar.net/avatar/" + userInfo.nickname'></v-img>
           </v-avatar>
 
           <v-lable>
-            krystoflinek
+            {{userInfo.nickname}}
           </v-lable>
         </v-col>
       </v-row>
@@ -118,13 +117,13 @@
           <v-row>
               <v-col cols="4" class="pa-0 ma-0">
                 <v-img width="70%"
-                src="https://minotar.net/avatar/krystoflinek"
+                :src='"https://minotar.net/avatar/" + userInfo.nickname'
                 >
               </v-img>
             </v-col>
 
             <v-col cols="8">
-              <v-card-title class="pa-0 ma-0">krystoflinek</v-card-title>
+              <v-card-title class="pa-0 ma-0">{{ userInfo.nickname }}</v-card-title>
             </v-col>
           </v-row>
         </v-list-item>
@@ -140,7 +139,7 @@
     </v-navigation-drawer>
 
     <v-main class="grey lighten-1 pa-0 pa-md-4 pa-lg-8">
-      <router-view></router-view>
+      <router-view @setUser="setUser" :userInfo="userInfo"></router-view>
     </v-main>
 
   </v-app>
@@ -153,6 +152,7 @@
       isUserLogged: false,
       isMenuShowed: false,
       serverInfo: null,
+      userInfo: null,
 
       links: [
         {
@@ -201,6 +201,21 @@
           console.log(status);
         }
       },
+      async getUserInfo(){
+        try{
+          const nickname = this.$credentialsManager.getNickname();
+
+          const response = await this.$http.get(`/user/info/${nickname}`);
+
+          if (response.status == 200){
+            this.userInfo = response.data;
+            this.isUserLogged = true;
+          }
+  
+        } catch(e){
+          console.log(e);
+        }
+      },
       myRedirect(type){
         if (type == "email")
           window.open('https://github.com/krystof-linek','_blank');
@@ -208,10 +223,22 @@
           window.open('https://www.facebook.com/krystof.linek/','_blank');
         if (type == "instagram")
           window.open('https://www.instagram.com/craftfun.cz/','_blank');
-    },
+      },
+      setUser(userInfo){
+        this.userInfo = userInfo;
+
+        //if (this.userInfo != null)
+          this.isUserLogged = true;
+      },
+      removeUser(){
+        this.userInfo = null;
+        this.isUserLogged = false;
+        this.$credentialsManager.removeCredentials();
+      }
     },
     mounted(){
       this.loadServerInfo();
+      this.$credentialsManager.isUserCredentialsData() ? this.getUserInfo() : '';
     }
   }
 </script>
