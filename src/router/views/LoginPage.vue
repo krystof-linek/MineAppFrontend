@@ -1,10 +1,13 @@
 <template>
   
-  <v-card v-if="$vuetify.breakpoint.mdAndUp" class="mx-auto mt-2 pb-0 orange lighten-2" rounded="lg" width="40vw">
+  <v-card class="mx-auto mt-7 mt-md-7 pb-0 orange lighten-2" 
+    :rounded="$vuetify.breakpoint.smAndUp ? 'lg' : '0'" 
+    :width="$vuetify.breakpoint.lgAndUp ? '40vw' : $vuetify.breakpoint.md ? '50%' : $vuetify.breakpoint.sm ? '60%' : '100%'"
+    >
     <v-card-title class="text-center orange">
       Přihlášení
     </v-card-title>
-    <v-card width="60%" class="mx-auto py-6 transparent" outlined>
+    <v-card width='90%' class="mx-auto py-6 transparent" outlined>
       <v-form v-model="valid" @submit.prevent="loginUser">
         <v-container>
           <v-row class="pa-0">
@@ -16,7 +19,8 @@
                 :rules="nameRules" 
                 label="Přihlašovací jméno" 
                 required
-                prepend-inner-icon="mdi-account">
+                prepend-inner-icon="mdi-account"
+                hint="Zadej svůj nickname v minecraftu.">
               </v-text-field>
             </v-col>
 
@@ -30,8 +34,19 @@
                 label="Heslo" required 
                 :append-icon="isShowedPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 prepend-inner-icon="mdi-lock" 
-                @click:append="isShowedPassword = !isShowedPassword">
+                @click:append="isShowedPassword = !isShowedPassword"
+                hint="Zadej heslo ke svému účtu.">
               </v-text-field>
+            </v-col>
+            <v-col v-if="isAlert" cols="12" class="pa-0">
+              <v-alert
+                border="top"
+                colored-border
+                type="error"
+                elevation="1"
+                >
+                {{alert}}
+              </v-alert>
             </v-col>
             <v-col cols="6" class="pa-0">
               <v-btn type="submit" :disabled="!valid" color="green">přihlásit se</v-btn>
@@ -44,16 +59,6 @@
       </v-form>
     </v-card>
   </v-card>
-
-  <v-row class="ma-0" v-else>
-    <v-col class="pa-0" cols="12">
-      <v-card rounded="0" v-for="post in posts" :key="post.id">
-        <v-card-title>{{post.title}}</v-card-title>
-        <v-card-text>{{post.text}}</v-card-text>
-        <v-divider></v-divider>
-      </v-card>    
-    </v-col>
-  </v-row>
 </template>
 <script>
 
@@ -62,7 +67,9 @@
     data () {
       return {
         isShowedPassword: false,
+        isAlert: false,
 
+        alert: '',
         valid: false,
         nickname: '',
         password: '',
@@ -78,7 +85,11 @@
     },
     methods: {
       async loginUser(){
+        this.isAlert = false;
+
         try{
+          this.nickname = this.nickname.toLowerCase();
+
           const response = await this.$http.post("/user/login", {nickname: this.nickname, password: this.password});
 
           if (response.status == 200){
@@ -87,7 +98,7 @@
           }
       
         } catch(e){
-          console.log(e);
+          this.setAlert(e.response.status);
         }
       },
 
@@ -102,8 +113,24 @@
           }
           
         } catch(e){
-          console.log(e);
+          this.setAlert(e.statusCode);
         }
+      },
+
+      setAlert(statusCode){
+
+        switch(statusCode) {
+          case 404:
+            this.alert = "Účet s tímto přihlašovacím jménem neexistuje!";
+            break;
+          case 401:
+            this.alert = "Zadal jsi nesprávné heslo!";
+            break;
+          default:
+            this.alert = "Vyskytla se neočekáváná chyba, kontaktujte prosím administrátory.";
+        } 
+
+        this.isAlert = true;
       },
 
       async newUser(){

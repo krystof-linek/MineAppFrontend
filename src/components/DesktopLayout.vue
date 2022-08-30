@@ -37,16 +37,18 @@
       <v-spacer></v-spacer>
 
       <v-btn v-if="!isUserLogged" color="black" class="white--text px-2" @click="$router.push({ name: 'loginPage' })">Přihlásit se<v-icon class="ml-1">mdi-login-variant</v-icon></v-btn>
-      <v-btn v-else color="black" class="white--text px-2" @click="removeUser">Odhlásit se<v-icon class="ml-1">mdi-login-variant</v-icon></v-btn>
+      <v-btn v-else color="black" class="white--text px-2" @click="removeUser">Odhlásit se<v-icon class="ml-1">mdi-logout-variant</v-icon></v-btn>
     </v-app-bar>
     <!-- Small devices nav bar (xs, sm)-->
     <v-app-bar v-else color="orange lighten-2" app flat height="70">
       <v-row class="ma-0" align="center">
 
         <v-col cols="3" sm="2" class="pa-0">
-          <v-btn color="orange" height="45" width="40" @click="isUserLogged = !isUserLogged">
-            <v-icon v-if="!isUserLogged" large>mdi-login-variant</v-icon>
-            <v-icon v-else large>mdi-logout-variant</v-icon>
+          <v-btn v-if="!isUserLogged" color="orange" height="45" width="40" @click="$router.push({ name: 'loginPage' })">
+            <v-icon large>mdi-login-variant</v-icon>
+          </v-btn>
+          <v-btn v-else color="orange" height="45" width="40" @click="removeUser">
+            <v-icon large>mdi-logout-variant</v-icon>
           </v-btn>
         </v-col>
 
