@@ -1,11 +1,16 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar class="px-7" height="40" color="orange" app>
+    <v-system-bar class="px-7 black--text" height="40" color="orange" app>
 
       <v-row v-if="serverInfo != null" align="center">
         
         <v-col class="px-0" cols="4" sm="3">
-          <v-card-title class="pa-0" :style="serverInfoTitleSize">IP: 82.208.17.33:27873</v-card-title>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="pa-0" :style="serverInfoTitleSize" @click="copy('82.208.17.33:27873')" text v-bind="attrs" v-on="on">IP: 82.208.17.33:27873</v-btn>
+            </template>
+            <span>Zkopírovat IP adresu</span>
+          </v-tooltip>
         </v-col>
 
         <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" sm="2">
@@ -13,7 +18,7 @@
         </v-col>
 
         <v-col class="px-0" cols="5" sm="2">
-          <v-card-title class="pa-0" :style="serverInfoTitleSize">Status: <span class="ml-1  font-weight-bold" :style="serverInfo.status == 'Online' ? 'color: #76FF03' : 'color: red'">{{serverInfo.status.toLowerCase()}}</span></v-card-title>
+          <v-card-title class="pa-0 ml-5" :style="serverInfoTitleSize">Status: <span class="ml-1  font-weight-bold" :style="serverInfo.status == 'Online' ? 'color: #76FF03' : 'color: red'">{{serverInfo.status.toLowerCase()}}</span></v-card-title>
         </v-col>
 
         <v-col v-if="$vuetify.breakpoint.smAndUp" class="px-0" sm="2">
@@ -32,7 +37,7 @@
 
       <v-btn style="font-size: 1.5vw" class="font-weight-bold" text color="black" @click="$router.push({ name: 'homePage' })"><v-icon x-large>mdi-home</v-icon></v-btn>
 
-      <v-btn v-for="link in links" :key="link.title" style="font-size: 1.5vw" class="font-weight-bold" text color="black" @click="$router.push({ name: link.route })">{{ link.title }}</v-btn>
+      <v-btn v-for="link in links" :key="link.title" style="font-size: 1.5vw" class="font-weight-bold text-capitalize" text color="black" @click="$router.push({ name: link.route })">{{ link.title }}</v-btn>
 
       <v-spacer></v-spacer>
 
@@ -97,11 +102,14 @@
       </v-list>
       
       <v-list v-if="isUserLogged" class="orange py-0 text-center">
-        <div v-for="n in 5" :key="n" link>
+        <div v-for="link in authLinks" :key="link.title" link>
           <v-list-item>
+            <v-list-item-icon>
+              <v-icon v-text="link.icon"></v-icon>
+            </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                Item {{ n }}
+                {{link.title}}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -132,9 +140,14 @@
 
         <v-divider></v-divider>
 
-        <v-list-item v-for="n in 5" :key="n" link>
+        <v-list-item v-for="link in authLinks" :key="link.title" link @click="$router.push({ name: link.route })">
+          <v-list-item-icon>
+            <v-icon v-text="link.icon"></v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Item {{ n }}</v-list-item-title>
+            <v-list-item-title>
+              {{link.title}}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -158,6 +171,18 @@
 
       links: [
         {
+          title: "AdminTým",
+          route: "contactPage",
+        },
+        {
+          title: "Pravidla",
+          route: "contactPage",
+        },
+        {
+          title: "BanList",
+          route: "contactPage",
+        },
+        {
           title: "Obchod",
           route: "shopPage"
         },
@@ -165,6 +190,24 @@
           title: "Kontakt",
           route: "contactPage",
         }
+      ],
+
+      authLinks: [
+        {
+          title: "Profil",
+          route: "profilePage",
+          icon: "mdi-account-circle"
+        },
+        {
+          title: "Nákupy",
+          route: "contactPage",
+          icon: "mdi-cart",
+        },
+        {
+          title: "Nastavení",
+          route: "contactPage",
+          icon: "mdi-cog",
+        },
       ],
     }),
     computed: {
@@ -218,6 +261,9 @@
           console.log(e);
         }
       },
+      async copy(text) {
+        await navigator.clipboard.writeText(text);
+      },
       myRedirect(type){
         if (type == "email")
           window.open('https://github.com/krystof-linek','_blank');
@@ -229,7 +275,7 @@
       setUser(userInfo){
         this.userInfo = userInfo;
 
-        //if (this.userInfo != null)
+        if (this.userInfo != null)
           this.isUserLogged = true;
       },
       removeUser(){

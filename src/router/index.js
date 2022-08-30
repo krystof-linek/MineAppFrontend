@@ -5,6 +5,8 @@ import HomePage from "./views/HomePage"
 import ContactPage from "./views/ContactPage"
 import ShopPage from "./views/ShopPage"
 
+import ProfilePage from "./views/ProfilePage"
+
 import LoginPage from "./views/LoginPage"
 import RegisterPage from "./views/RegisterPage"
 
@@ -92,6 +94,7 @@ const routes = [
     { path: "/obchod", component: ShopPage, name: "shopPage"},
     { path: "/prihlaseni", component: LoginPage, name: "loginPage"},
     { path: "/registrace", component: RegisterPage, name: "registerPage"},
+    { path: "/profil", component: ProfilePage, name: "profilePage", meta: { requireAuth: true }},
 ];
 
 const router = new VueRouter( {routes: routes, mode: "history"} );
