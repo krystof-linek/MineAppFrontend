@@ -23,13 +23,13 @@
         </v-col>
             
         <v-col cols="12">
-          <v-card class="pa-0 ma-0 orange lighten-2" rounded="lg">
+          <v-card class="pa-0 ma-0" rounded="lg">
             <v-card-title class="orange">Sponzor měsíce</v-card-title>
             <v-card color="transparent" outlined>
               <v-list color="px-0 py-4 transparent" outlined>
                 <v-list-item>
                   <v-list-item-title class="text-center mt-1 mt-xl-2">
-                    <v-chip class="orange text-h5 text-xl-h4 py-xl-6 px-xl-8">
+                    <v-chip class="orange lighten-2 text-h5 text-xl-h4 py-xl-6 px-xl-8">
                       krystoflinek
                     </v-chip>
                   </v-list-item-title>
@@ -41,7 +41,7 @@
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-title class="text-center text-subtitle-1 mt-1 mt-xl-2">
-                    Hráč za tento měsíc přispěl <v-chip class="font-weight-bold orange">500kč</v-chip> na chod serveru.
+                    Hráč za tento měsíc přispěl <v-chip class="font-weight-bold orange lighten-2">500kč</v-chip> na chod serveru.
                   </v-list-item-title>
                 </v-list-item>
                 <v-list-item>

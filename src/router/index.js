@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 
 import HomePage from "./views/HomePage"
 import ContactPage from "./views/ContactPage"
+import BanListPage from "./views/BanListPage"
 import ShopPage from "./views/ShopPage"
 
 import ProfilePage from "./views/ProfilePage"
@@ -94,6 +95,7 @@ const routes = [
     { path: "/obchod", component: ShopPage, name: "shopPage"},
     { path: "/prihlaseni", component: LoginPage, name: "loginPage"},
     { path: "/registrace", component: RegisterPage, name: "registerPage"},
+    { path: "/banlist", component: BanListPage, name: "banListPage"},
     { path: "/profil", component: ProfilePage, name: "profilePage", meta: { requireAuth: true }},
 ];
 

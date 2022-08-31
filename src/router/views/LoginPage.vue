@@ -1,6 +1,6 @@
 <template>
   
-  <v-card class="mx-auto mt-7 mt-md-7 pb-0 orange lighten-2" 
+  <v-card class="mx-auto mt-7 mt-md-7 pb-0" 
     :rounded="$vuetify.breakpoint.smAndUp ? 'lg' : '0'" 
     :width="$vuetify.breakpoint.lgAndUp ? '40vw' : $vuetify.breakpoint.md ? '50%' : $vuetify.breakpoint.sm ? '60%' : '100%'"
     >

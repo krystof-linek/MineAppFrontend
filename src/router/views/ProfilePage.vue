@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="userInfo != null" class="orange lighten-2 pb-5 mx-auto" rounded="lg" width="80%">
+  <v-card v-if="userInfo != null" class="pb-5 mx-auto" rounded="lg" width="80%">
     <v-card-title class="orange">
       {{userInfo.nickname}}
     </v-card-title>
@@ -87,6 +87,6 @@
 </script>
 <style>
 tr:hover td {
-  background-color: #FF9800;
+  background-color: #FFB74D;
 }
 </style>

@@ -180,7 +180,7 @@
         },
         {
           title: "BanList",
-          route: "contactPage",
+          route: "banListPage",
         },
         {
           title: "Obchod",
