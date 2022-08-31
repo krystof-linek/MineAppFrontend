@@ -7,7 +7,7 @@
     <v-card class="transparent mx-10 mt-5" outlined>
 
       <v-row justify="center" align="center">
-        <v-col cols="5" class="text-center">
+        <v-col cols="6" class="text-center">
           <v-btn class="black white--text" :disabled="activeList == 'temporary'" @click="changeList('temporary')">
             Dočasné
           </v-btn>
@@ -22,7 +22,7 @@
           </v-btn>
         </v-col>
         
-        <v-col cols="7">
+        <v-col cols="6">
           <v-text-field color="black" ouutlined v-model="search" outlined hide-details prepend-inner-icon="mdi-magnify" label="Vyhledat"></v-text-field>
         </v-col>
       </v-row>
