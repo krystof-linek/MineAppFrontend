@@ -101,6 +101,7 @@
       
         } catch(e){
           this.setAlert(e.response.status);
+          console.log(e.response.status + " TOHLE JE ERROR STATUS");
         }
       },
 
@@ -116,6 +117,7 @@
           
         } catch(e){
           this.setAlert(e.statusCode);
+          console.log(e.response.status + " TOHLE JE ERROR STATUS");
         }
       },
 
