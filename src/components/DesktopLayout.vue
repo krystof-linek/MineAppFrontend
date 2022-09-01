@@ -241,9 +241,7 @@
           this.serverInfo = response.data;
 
         } catch (e) {
-          const status = e.response.status;
-            
-          console.log(status);
+          console.log(e.response.status);
         }
       },
       async getUserInfo(){
@@ -258,7 +256,10 @@
           }
   
         } catch(e){
-          console.log(e);
+          if (e.response.status == 403){
+            this.$credentialsManager.removeCredentials();
+            this.$router.push({ name: 'loginPage' })
+          }
         }
       },
       async copy(text) {

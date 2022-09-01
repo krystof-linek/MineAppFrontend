@@ -115,7 +115,7 @@
           }
           
         } catch(e){
-          this.setAlert(e.statusCode);
+          this.setAlert(e.response.status);
         }
       },
 
