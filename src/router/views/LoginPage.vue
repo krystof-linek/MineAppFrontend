@@ -117,7 +117,7 @@
           
         } catch(e){
           this.setAlert(e.statusCode);
-          console.log(e.response.status + " TOHLE JE ERROR STATUS");
+          console.log(e.response.status + " TOHLE JE ERROR STATUS USER INFO");
         }
       },
 
