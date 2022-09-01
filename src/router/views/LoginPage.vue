@@ -95,14 +95,13 @@
           const response = await this.$http.post("/user/login", {nickname: this.nickname, password: this.password});
 
           if (response.status == 200){
-            //this.$credentialsManager.setCredentials(response.data, this.nickname);
-            //this.getUserInfo();
-            console.log(response.data)
+            this.$credentialsManager.setCredentials(response.data, this.nickname);
+            this.getUserInfo();
+            console.log(this.$credentialsManager.getToken() + " login");
           }
       
         } catch(e){
           this.setAlert(e.response.status);
-          console.log(e.response.status + " TOHLE JE ERROR STATUS");
         }
       },
 
@@ -119,6 +118,7 @@
         } catch(e){
           this.setAlert(e.statusCode);
           console.log(e.response.status + " TOHLE JE ERROR STATUS USER INFO");
+          console.log(this.$credentialsManager.getToken() + " userInfo");
         }
       },
 
