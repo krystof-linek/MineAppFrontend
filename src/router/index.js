@@ -108,7 +108,7 @@ router.beforeEach((to, from, next) => {
             next();
         } else {
             credentialsManager.removeCredentials();
-            next({ name: "homePage" });
+            next({ name: "loginPage" });
         } 
     } else {
         next();
