@@ -95,8 +95,9 @@
           const response = await this.$http.post("/user/login", {nickname: this.nickname, password: this.password});
 
           if (response.status == 200){
-            this.$credentialsManager.setCredentials(response.data, this.nickname);
-            this.getUserInfo();
+            //this.$credentialsManager.setCredentials(response.data, this.nickname);
+            //this.getUserInfo();
+            console.log(response.data)
           }
       
         } catch(e){
