@@ -87,6 +87,8 @@
       async loginUser(){
         this.isAlert = false;
 
+        this.$credentialsManager.removeCredentials();
+
         try{
           this.nickname = this.nickname.toLowerCase();
 
