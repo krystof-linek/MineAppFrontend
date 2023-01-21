@@ -1,7 +1,7 @@
 <template>
-  <v-card v-if="userInfo != null" class="pb-5 mx-auto" rounded="lg" width="80%">
-    <v-card-title class="orange">
-      {{userInfo.nickname}}
+  <v-card v-if="userInfo != null" class="pb-5 mx-auto" rounded="lg" width="60%">
+    <v-card-title class="orange justify-center">
+      Profil uživatele
     </v-card-title>
     <v-card class="transparent" outlined>
       <v-row>

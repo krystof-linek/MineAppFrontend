@@ -14,7 +14,7 @@
         <v-col cols="12">
           <v-card rounded="lg" class="pa-0 ma-0" height="300">
             <iframe
-              :src="`https://mine-app-dynamp.herokuapp.com/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true`"
+              :src="`https://craftfun.cz/mapa/?worldname=world&mapname=surface&zoom=1&nopanel=true&hidechat=true&nocompass=true`"
               width="100%"
               height="300"
               frameborder="0" >

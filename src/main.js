@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import router from "./router";
 import CredentialsManager from "./code/credentialsManager";
 import axiosInstance from "./code/http";
+import VueSSE from 'vue-sse';
 
 export const credentialsManager = new CredentialsManager();
 credentialsManager.findCredentialsData();
@@ -12,9 +13,12 @@ Vue.prototype.$credentialsManager = credentialsManager;
 
 Vue.prototype.$http = axiosInstance;
 
+Vue.prototype.$sse = VueSSE;
+
 Vue.config.productionTip = false
 
 new Vue({
+  VueSSE,
   vuetify,
   router: router,
   render: h => h(App)

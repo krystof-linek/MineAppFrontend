@@ -1,13 +1,12 @@
 <template>
-  <v-card class="pb-5 mx-auto" rounded="lg" width="90%">
-    <v-card-title class="orange">
-      BanList
+  <v-card rounded="lg">
+    <v-card-title class="orange justify-center">
+      Seznam zabanovaných hráčů
     </v-card-title>
     
     <v-card class="transparent mx-10 mt-5" outlined>
-
-      <v-row justify="center" align="center">
-        <v-col cols="6" class="text-center">
+      <v-card-actions>
+       
           <v-btn class="black white--text" :disabled="activeList == 'temporary'" @click="changeList('temporary')">
             Dočasné
           </v-btn>
@@ -17,16 +16,15 @@
           <v-btn class="black white--text mr-5" :disabled="activeList == 'ip'" @click="changeList('ip')">
             IP
           </v-btn>
-          <v-btn rounded class="black white--text" @click="loadAllLists()">
+          <v-btn fab class="black white--text" small @click="loadAllLists()">
             <v-icon>mdi-sync</v-icon>
           </v-btn>
-        </v-col>
-        
-        <v-col cols="6">
-          <v-text-field color="black" ouutlined v-model="search" outlined hide-details prepend-inner-icon="mdi-magnify" label="Vyhledat"></v-text-field>
-        </v-col>
-      </v-row>
 
+          <v-spacer></v-spacer>
+       
+          <v-text-field color="black" v-model="search" outlined hide-details prepend-inner-icon="mdi-magnify" label="Vyhledat" width="30px"></v-text-field>
+      </v-card-actions>
+  
       <v-card v-if="isLoading" class="transparent mt-2" outlined>
         <v-skeleton-loader light
           type="table"
