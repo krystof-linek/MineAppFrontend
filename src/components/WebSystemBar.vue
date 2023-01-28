@@ -1,5 +1,5 @@
 <template>
-    <v-system-bar v-if="hasServerInfo" class="px-4 black--text text-uppercase font-weight-medium" height="40" color="orange" app clipped-left>
+    <v-system-bar v-if="hasServerInfo" class="px-8 black--text text-uppercase font-weight-medium" height="40" color="orange" app clipped-left>
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">

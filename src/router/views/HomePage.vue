@@ -1,12 +1,19 @@
 <template>
   <v-row v-if="$vuetify.breakpoint.mdAndUp">
     <v-col cols="7">
+        <v-card rounded="lg" class="mb-4 three-lines" hidden v-for="post in posts" :key="post.postId" @mouseover="hoveredPost = post.postId" @mouseleave="hoveredPost = -1" 
+                @click="$router.push({ name: 'webPostPage', params: {id_post: post.postId, post: formatePost(post)} })"> 
           
-        <v-card rounded="lg" class="mb-4" v-for="post in posts" :key="post.id">
-          <v-card-title>{{post.title}}</v-card-title>
-          <v-card-text>{{post.text}}</v-card-text>
-        </v-card>
-          
+          <web-post :postData = formatePost(post)></web-post>
+      
+          <v-card-actions class="justify-end" v-if="hoveredPost == post.postId">
+            <v-btn color="black" text><v-icon class="mr-1">fa-solid fa-trash-can</v-icon>smazat</v-btn>
+            <v-btn color="black" text><v-icon class="mr-1">fa-solid fa-share-from-square</v-icon>sdílet</v-btn>
+            <v-btn color="black" text @click="$router.push({ name: 'webPostPage', params: {postTitle: post.title, postText: post.text, propEdit: true} })">
+              <v-icon class="mr-1">fa-solid fa-pen-to-square</v-icon>upravit
+            </v-btn>
+          </v-card-actions>
+        </v-card> 
     </v-col>
         
     <v-col cols="5" class="pa-0">
@@ -63,41 +70,67 @@
         <v-card-title>{{post.title}}</v-card-title>
         <v-card-text>{{post.text}}</v-card-text>
         <v-divider></v-divider>
-      </v-card>    
+      </v-card>
     </v-col>
   </v-row>
 </template>
 <script>
+import WebPost from '../../components/WebPost';
 
-  export default {
+export default {
     props: {
         userInfo: {default: null},
     },
+    components: {
+      WebPost
+    },
     data () {
       return {
-        posts: [
-        {
-          id: 0,
-          title: "1. Nadpis příspěvku",
-          text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Etiam egestas wisi a erat. Donec quis nibh at felis congue commodo. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Quisque porta. Nunc dapibus tortor vel mi dapibus sollicitudin. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Nulla est. Maecenas sollicitudin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
-        },
-        {
-          id: 1,
-          title: "2. Nadpis příspěvku",
-          text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Etiam egestas wisi a erat. Donec quis nibh at felis congue commodo. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Quisque porta. Nunc dapibus tortor vel mi dapibus sollicitudin. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Nulla est. Maecenas sollicitudin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
-        },
-        {
-          id: 2,
-          title: "3. Nadpis příspěvku",
-          text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Etiam egestas wisi a erat. Donec quis nibh at felis congue commodo. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Quisque porta. Nunc dapibus tortor vel mi dapibus sollicitudin. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Nulla est. Maecenas sollicitudin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
-        },
-        {
-          id: 3,
-          title: "4. Nadpis příspěvku",
-          text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Etiam egestas wisi a erat. Donec quis nibh at felis congue commodo. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Quisque porta. Nunc dapibus tortor vel mi dapibus sollicitudin. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Nulla est. Maecenas sollicitudin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
-        },
-        ]
+        hoveredPost: -1,
+        postsToLoad: 6,
+        posts: []
       }
+    },
+    methods: {
+      async loadLastPosts(){
+        try {
+          const response =  await this.$http.get(`/post/get/lasts/${this.postsToLoad}`);
+
+          this.posts = response.data;
+
+        } catch(e){
+          console.log(e)
+        }
+      },
+      formatePost(post){
+        let postData = {
+          title: post.title,
+          htmlContent: post.htmlContent,
+          categoryName: post.category.category_name,
+          author: post.author,
+          edited: post.edited,
+          created: post.created,
+          modified: post.modified,
+          important: post.important,
+        };
+
+        return postData
+      }
+    },
+    mounted() {
+      if (this.posts.length == 0)
+        this.loadLastPosts()
     },
   }
 </script>
+
+<style>
+.three-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 10;
+  white-space: normal;
+}
+</style>

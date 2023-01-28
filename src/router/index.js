@@ -5,6 +5,7 @@ import HomePage from "./views/HomePage"
 import ContactPage from "./views/ContactPage"
 import BanListPage from "./views/BanListPage"
 import ShopPage from "./views/ShopPage"
+import WebPostPage from "./views/WebPostPage"
 
 import ProfilePage from "./views/ProfilePage"
 import ConsolePage from "./views/ConsolePage"
@@ -106,6 +107,19 @@ const routes = [
       }},
     { path: "/kontakty", component: ContactPage, name: "contactPage", meta: {
         title: 'Kontakty',
+        metaTags: [
+          {
+            name: 'description',
+            content: 'The home page of our example app.'
+          },
+          {
+            property: 'og:description',
+            content: 'The home page of our example app.'
+          }
+        ]
+      }},
+      { path: "/prispevek/:id_post", component: WebPostPage, props: true, name: "webPostPage", meta: {
+        title: 'Příspěvek',
         metaTags: [
           {
             name: 'description',

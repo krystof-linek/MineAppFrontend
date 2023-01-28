@@ -37,7 +37,7 @@ export default {
     WebSystemBar,
     WebAppBar,
     WebFooter,
-    WebNavDrawer
+    WebNavDrawer,
   },
 
   data: () => ({
